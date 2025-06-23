@@ -33,3 +33,4 @@ Uma recriação do popular jogo de palavras estilo "Termo" ou "Wordle", utilizan
 1. Clone o repositório:
    ```bash
    git clone https://github.com/uniplac-victorcunha/IDW-Projeto-Final.git
+2. Execute o arquivo index.html
