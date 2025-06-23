@@ -15,7 +15,6 @@ async function getPalavraAleatoria() {
     "plano",
     "carta",
     "linha",
-    "folha",
     "vento",
     "terra",
     "ponto",
