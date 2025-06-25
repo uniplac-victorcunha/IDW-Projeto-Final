@@ -81,33 +81,49 @@ async function tentar() {
   }
 
   mostrarMensagem("");
-
-  const linhaAtual = document.getElementById(`linha-${tentativas}`);
-  const acertos = [];
-
   entradaBloqueada = true;
 
+  const linhaAtual = document.getElementById(`linha-${tentativas}`);
+  const letraDivs = [];
+
+  // Cria cópia da palavra secreta para controle
+  const secretaArray = palavraSecreta.split("");
+  const usada = Array(5).fill(false);
+
+  // Primeiro passo: marca os verdes (posição correta)
   for (let i = 0; i < 5; i++) {
     const letraDiv = document.getElementById(`letra-${tentativas}-${i}`);
-    const delay = i * 200;
+    const letra = palavra[i];
+    letraDiv.textContent = letra;
+    letraDiv.classList.add("letter", "animate-zoom");
+    letraDivs.push(letraDiv);
 
-    setTimeout(() => {
-      const letra = palavra[i];
-      letraDiv.textContent = letra;
-      letraDiv.classList.add("animate-zoom");
+    if (letra === palavraSecreta[i]) {
+      letraDiv.classList.add("green");
+      usada[i] = true;
+    }
+  }
 
-      if (letra === palavraSecreta[i]) {
-        letraDiv.classList.add("green");
-        acertos.push(true);
-      } else {
-        letraDiv.classList.add("gray");
-        acertos.push(false);
+  for (let i = 0; i < 5; i++) {
+    const letra = palavra[i];
+    const letraDiv = letraDivs[i];
+
+    if (letraDiv.classList.contains("green")) continue;
+
+    let found = false;
+    for (let j = 0; j < 5; j++) {
+      if (!usada[j] && letra === secretaArray[j]) {
+        usada[j] = true;
+        found = true;
+        break;
       }
+    }
 
-      setTimeout(() => {
-        letraDiv.classList.remove("animate-zoom");
-      }, 300);
-    }, delay);
+    if (found) {
+      letraDiv.classList.add("yellow");
+    } else {
+      letraDiv.classList.add("gray");
+    }
   }
 
   setTimeout(() => {
@@ -129,16 +145,16 @@ async function tentar() {
       linhaAtual.classList.add("animate-shake");
     }
 
-
     setTimeout(() => {
       linhaAtual.classList.remove("animate-bounce", "animate-shake");
       entradaBloqueada = false;
     }, 500);
-  }, 1200)
+  }, 1200);
 
   input.value = "";
-
 }
+
+
 function toggleTheme() {
   const html = document.documentElement;
   html.dataset.bsTheme = html.dataset.bsTheme === "dark" ? "light" : "dark";
