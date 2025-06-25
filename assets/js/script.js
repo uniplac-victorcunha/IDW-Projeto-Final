@@ -13,21 +13,7 @@ async function getPalavraAleatoria() {
     "pedra",
     "livro",
     "plano",
-    "carta",
-    "linha",
-    "vento",
-    "terra",
-    "ponto",
-    "sonho",
-    "leite",
-    "porta",
-    "navio",
-    "festa",
-    "lente",
-    "noite",
-    "campo",
-    "roupa",
-    "troco",
+    "carta"
   ];
   palavraSecreta = palavras[Math.floor(Math.random() * palavras.length)];
   console.log("Palavra:", palavraSecreta);
